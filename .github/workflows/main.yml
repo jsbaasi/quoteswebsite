@@ -18,4 +18,18 @@ jobs:
     
     - name: Build the project
       run: sh gradlew build
+
+    - name: Generate the static site
+      run: sh gradlew run
+
+    - name: Setup pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: './dist/'
       
+    - name: Deploy to Github pages
+      id: deployment
+      uses: actions/deploy-pages@v3
